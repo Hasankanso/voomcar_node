@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 http.createServer(app).listen(port);
