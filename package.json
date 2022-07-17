@@ -1,20 +1,9 @@
 {
-  "name": "voomcar-node",
-  "version": "1.0.0",
-  "description": "Backend, REST API of voomcar app",
-  "main": "index.js",
+  "name": "mslearn-demo",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://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@github.com/Hasankanso/voomcar_node.git"
-  },
-  "author": "Voomcar Team",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Hasankanso/voomcar_node/issues"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,8 +11,6 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11",
-	"normalize-port" : "~1.0.0"
-  },
-  "homepage": "https://github.com/Hasankanso/voomcar_node#readme"
+    "pug": "2.0.0-beta11"
+  }
 }
