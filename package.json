@@ -1,0 +1,19 @@
+{
+  "name": "voomcar-node",
+  "version": "1.0.0",
+  "description": "Backend, REST API of voomcar app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/Hasankanso/voomcar_node.git"
+  },
+  "author": "Voomcar Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hasankanso/voomcar_node/issues"
+  },
+  "homepage": "https://github.com/Hasankanso/voomcar_node#readme"
+}
