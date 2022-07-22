@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){
-   res.send("Hello ya 3alam. Let's rock it!");
+   res.send("Hello World. Let's rock it!");
 });
 
 
