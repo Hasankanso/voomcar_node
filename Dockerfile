@@ -1,4 +1,4 @@
-FROM node:current-alpine
+FROM node:18.6.0-alpine3.15
 COPY . /app
 WORKDIR /app
 RUN npm install --only=prod
