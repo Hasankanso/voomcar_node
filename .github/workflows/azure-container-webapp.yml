@@ -46,7 +46,7 @@ jobs:
         login-server: backendcodereg.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-
+    - uses: actions/checkout@v3
     - run: |
         docker build . -t backendcodereg.azurecr.io/webapp:${{ github.sha }}
         docker push backendcodereg.azurecr.io/webapp:${{ github.sha }}
