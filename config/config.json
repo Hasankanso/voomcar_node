@@ -1,20 +1,20 @@
 {
   "development": {
-    "username": "voomcarDBAdmin",
+    "username": "voomcarDBAdmin@voomcar-db-mysql",
     "password": "2$c%YKN8vsU4jqG07SG7EkBX9T",
     "database": "voomcar-db-mysql",
     "host": "voomcar-db-mysql.mysql.database.azure.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "voomcarDBAdmin",
+    "username": "voomcarDBAdmin@voomcar-db-mysql",
     "password": "2$c%YKN8vsU4jqG07SG7EkBX9T",
     "database": "voomcar-db-mysql",
     "host": "voomcar-db-mysql.mysql.database.azure.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "voomcarDBAdmin",
+    "username": "voomcarDBAdmin@voomcar-db-mysql",
     "password": "2$c%YKN8vsU4jqG07SG7EkBX9T",
     "database": "voomcar-db-mysql",
     "host": "voomcar-db-mysql.mysql.database.azure.com",
