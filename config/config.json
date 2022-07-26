@@ -5,6 +5,7 @@
     "database": "voomcar-db-mysql.mysql.database.azure.com",
     "host": "voomcar-db-mysql.mysql.database.azure.com",
     "dialect": "mysql"
+    "use_env_variable": 0
   },
   "test": {
     "username": "voomcarDBAdmin@voomcar-db-mysql",
