@@ -4,7 +4,7 @@
     "password": "2$c%YKN8vsU4jqG07SG7EkBX9T",
     "database": "voomcar-db-mysql.mysql.database.azure.com",
     "host": "voomcar-db-mysql.mysql.database.azure.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
     "use_env_variable": 0
   },
   "test": {
