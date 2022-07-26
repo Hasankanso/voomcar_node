@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "voomCar",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "voomcarDBAdmin",
+    "password": "2$c%YKN8vsU4jqG07SG7EkBX9T",
+    "database": "voomcar-db-maria",
+    "host": "voomcar-db-maria.mariadb.database.azure.com",
+    "dialect": "mariadb"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "voomcarDBAdmin",
+    "password": "2$c%YKN8vsU4jqG07SG7EkBX9T",
+    "database": "voomcar-db-maria",
+    "host": "voomcar-db-maria.mariadb.database.azure.com",
+    "dialect": "mariadb"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "voomcarDBAdmin",
+    "password": "2$c%YKN8vsU4jqG07SG7EkBX9T",
+    "database": "voomcar-db-maria",
+    "host": "voomcar-db-maria.mariadb.database.azure.com",
+    "dialect": "mariadb"
   }
 }
