@@ -1,36 +1,36 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('person', {
-    bio: {
-      type: DataTypes.STRING(500),
+  return sequelize.define('car', {
+    brand: {
+      type: DataTypes.STRING(100),
       allowNull: true
     },
-    birthday: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    chattiness: {
+    color: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    firstName: {
-      type: DataTypes.STRING(250),
+    maxLuggage: {
+      type: DataTypes.INTEGER,
       allowNull: true
     },
-    gender: {
-      type: DataTypes.BOOLEAN,
+    maxSeats: {
+      type: DataTypes.INTEGER,
       allowNull: true
     },
-    image: {
-      type: DataTypes.STRING(256),
+    name: {
+      type: DataTypes.STRING(100),
       allowNull: true
     },
-    lastName: {
-      type: DataTypes.STRING(500),
+    picture: {
+      type: DataTypes.STRING(750),
       allowNull: true
     },
-    token: {
-      type: DataTypes.STRING(500),
+    type: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    year: {
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     objectId: {
@@ -54,26 +54,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    countryInformations: {
+    driver: {
       type: DataTypes.BLOB,
       allowNull: true,
       references: {
-        model: 'countryinformation',
+        model: 'driver',
         key: 'objectId'
       }
-    },
-    statistics: {
-      type: DataTypes.BLOB,
-      allowNull: true,
-      references: {
-        model: 'userstatistics',
-        key: 'objectId'
-      },
-      unique: "person_ibfk_3"
     }
   }, {
     sequelize,
-    tableName: 'person',
+    tableName: 'car',
     timestamps: false,
     indexes: [
       {
@@ -85,14 +76,6 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "statistics",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "statistics" },
-        ]
-      },
-      {
         name: "ownerId",
         using: "BTREE",
         fields: [
@@ -100,10 +83,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "countryInformations",
+        name: "driver",
         using: "BTREE",
         fields: [
-          { name: "countryInformations" },
+          { name: "driver" },
         ]
       },
     ]

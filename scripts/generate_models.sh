@@ -1,0 +1,1 @@
+sequelize-auto -h voomcar-db-mysql.mysql.database.azure.com -d voomcar -u voomcarDBAdmin@voomcar-db-mysql -x 2$c%YKN8vsU4jqG07SG7EkBX9T -p 3306  --dialect mysql -o ./candidate_models

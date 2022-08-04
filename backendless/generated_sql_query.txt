@@ -1,5 +1,28 @@
 USE voomcar;
 SET foreign_key_checks = 0;
+
+ALTER DATABASE
+voomcar
+CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS alert;
+DROP TABLE IF EXISTS blConfigurationItemDescription;
+DROP TABLE IF EXISTS car;
+DROP TABLE IF EXISTS countryInformation;
+DROP TABLE IF EXISTS deviceRegistration;
+DROP TABLE IF EXISTS driver;
+DROP TABLE IF EXISTS location;
+DROP TABLE IF EXISTS Loggers;
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS rate;
+DROP TABLE IF EXISTS reserve;
+DROP TABLE IF EXISTS ride;
+DROP TABLE IF EXISTS schedule;
+DROP TABLE IF EXISTS scheduleRide;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS userStatistics;
+
 CREATE TABLE IF NOT EXISTS alert (`leavingDate` DATETIME ,
 `price` DOUBLE ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
@@ -10,28 +33,27 @@ CREATE TABLE IF NOT EXISTS alert (`leavingDate` DATETIME ,
 `passenger` BINARY(16) , FOREIGN KEY (`passenger`) REFERENCES `person`(`objectId`),
 `to` BINARY(16) , FOREIGN KEY (`to`) REFERENCES `location`(`objectId`));
 
-CREATE TABLE IF NOT EXISTS blConfigurationItemDescription (`defaultValue` VARCHAR(250) ,
-`displayName` VARCHAR(250) ,
-`hint` VARCHAR(250) ,
-`localServiceVersion` VARCHAR(250) ,
-`name` VARCHAR(250) ,
-`options` VARCHAR(250) ,
+CREATE TABLE IF NOT EXISTS blConfigurationItemDescription (`defaultValue` NVARCHAR(250) ,
+`displayName` NVARCHAR(250) ,
+`hint` NVARCHAR(250) ,
+`localServiceVersion` NVARCHAR(250) ,
+`name` NVARCHAR(250) ,
+`options` NVARCHAR(250) ,
 `order` DOUBLE ,
 `required` BOOLEAN ,
-`type` VARCHAR(250) ,
+`type` NVARCHAR(250) ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
 `created` DATETIME ,
 `updated` DATETIME );
 
-CREATE TABLE IF NOT EXISTS car (`brand` VARCHAR(500) ,
+CREATE TABLE IF NOT EXISTS car (`brand` NVARCHAR(100) ,
 `color` INT ,
 `maxLuggage` INT ,
 `maxSeats` INT ,
-`name` TEXT ,
-`picture` VARCHAR(256) ,
+`name` NVARCHAR(100) ,
+`picture` NVARCHAR(750) ,
 `type` INT ,
-`user` VARCHAR(250) ,
 `year` INT ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
@@ -39,28 +61,28 @@ CREATE TABLE IF NOT EXISTS car (`brand` VARCHAR(500) ,
 `updated` DATETIME ,
 `driver` BINARY(16) , FOREIGN KEY (`driver`) REFERENCES `driver`(`objectId`));
 
-CREATE TABLE IF NOT EXISTS countryInformation (`code` VARCHAR(250) ,
-`countryComponent` VARCHAR(250) ,
+CREATE TABLE IF NOT EXISTS countryInformation (`code` NVARCHAR(10) ,
+`countryComponent` NVARCHAR(10) ,
 `digits` INT ,
 `drivingAge` INT ,
 `maxPrice` DOUBLE ,
 `minPrice` DOUBLE ,
-`name` VARCHAR(500) ,
+`name` NVARCHAR(100) ,
 `priceStep` DOUBLE ,
 `rateStart` INT ,
-`unit` VARCHAR(500) ,
+`unit` NVARCHAR(50) ,
  INDEX (`unit`),
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
 `created` DATETIME ,
 `updated` DATETIME );
 
-CREATE TABLE IF NOT EXISTS deviceRegistration (`channelName` VARCHAR(45)  NOT NULL,
-`deviceId` VARCHAR(45)  NOT NULL,
-`deviceToken` VARCHAR(256)  NOT NULL,
+CREATE TABLE IF NOT EXISTS deviceRegistration (`channelName` NVARCHAR(45)  NOT NULL,
+`deviceId` NVARCHAR(45)  NOT NULL,
+`deviceToken` NVARCHAR(256)  NOT NULL,
 `expiration` DATETIME ,
-`operatingSystemName` VARCHAR(15)  NOT NULL,
-`operatingSystemVersion` VARCHAR(45) ,
+`operatingSystemName` NVARCHAR(15)  NOT NULL,
+`operatingSystemVersion` NVARCHAR(45) ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
 `created` DATETIME ,
@@ -76,8 +98,8 @@ CREATE TABLE IF NOT EXISTS driver (`objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `region2` BINARY(16) , FOREIGN KEY (`region2`) REFERENCES `location`(`objectId`),
 `region3` BINARY(16) , FOREIGN KEY (`region3`) REFERENCES `location`(`objectId`));
 
-CREATE TABLE IF NOT EXISTS location (`name` VARCHAR(500) ,
-`placeId` VARCHAR(250)  UNIQUE,
+CREATE TABLE IF NOT EXISTS location (`name` NVARCHAR(500) ,
+`placeId` NVARCHAR(250)  UNIQUE,
  INDEX (`placeId`),
 `position` GEOMETRY ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
@@ -85,23 +107,23 @@ CREATE TABLE IF NOT EXISTS location (`name` VARCHAR(500) ,
 `created` DATETIME ,
 `updated` DATETIME );
 
-CREATE TABLE IF NOT EXISTS Loggers (`level` VARCHAR(250)  NOT NULL,
-`logFormat` VARCHAR(250)  NOT NULL,
-`name` VARCHAR(250)  NOT NULL,
-`policy` VARCHAR(250)  NOT NULL,
+CREATE TABLE IF NOT EXISTS Loggers (`level` NVARCHAR(250)  NOT NULL,
+`logFormat` NVARCHAR(250)  NOT NULL,
+`name` NVARCHAR(250)  NOT NULL,
+`policy` NVARCHAR(250)  NOT NULL,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
 `created` DATETIME ,
 `updated` DATETIME );
 
-CREATE TABLE IF NOT EXISTS person (`bio` VARCHAR(500) ,
+CREATE TABLE IF NOT EXISTS person (`bio` NVARCHAR(500) ,
 `birthday` DATETIME ,
 `chattiness` INT ,
-`firstName` VARCHAR(250) ,
+`firstName` NVARCHAR(100) ,
 `gender` BOOLEAN ,
-`image` VARCHAR(256) ,
-`lastName` VARCHAR(500) ,
-`token` VARCHAR(500) ,
+`image` NVARCHAR(750) ,
+`lastName` NVARCHAR(100) ,
+`token` NVARCHAR(500) ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
 `created` DATETIME ,
@@ -109,7 +131,7 @@ CREATE TABLE IF NOT EXISTS person (`bio` VARCHAR(500) ,
 `countryInformations` BINARY(16) , FOREIGN KEY (`countryInformations`) REFERENCES `countryInformation`(`objectId`),
 `statistics` BINARY(16)  UNIQUE, FOREIGN KEY (`statistics`) REFERENCES `userStatistics`(`objectId`));
 
-CREATE TABLE IF NOT EXISTS rate (`comment` VARCHAR(500) ,
+CREATE TABLE IF NOT EXISTS rate (`comment` NVARCHAR(500) ,
 `grade` DOUBLE  NOT NULL,
 `reason` INT ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
@@ -122,7 +144,7 @@ CREATE TABLE IF NOT EXISTS rate (`comment` VARCHAR(500) ,
 
 CREATE TABLE IF NOT EXISTS reserve (`luggages` INT ,
 `seats` INT ,
-`status` VARCHAR(250) ,
+`status` NVARCHAR(100) ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
 `created` DATETIME ,
@@ -133,17 +155,17 @@ CREATE TABLE IF NOT EXISTS reserve (`luggages` INT ,
 CREATE TABLE IF NOT EXISTS ride (`acAllowed` BOOLEAN ,
 `availableLuggages` INT ,
 `availableSeats` INT ,
-`comment` VARCHAR(400) ,
+`comment` NVARCHAR(400) ,
 `kidSeat` BOOLEAN ,
 `leavingDate` DATETIME ,
-`map` VARCHAR(256) ,
+`map` NVARCHAR(750) ,
 `maxLuggages` INT ,
 `maxSeats` INT ,
 `musicAllowed` BOOLEAN ,
 `petsAllowed` BOOLEAN ,
 `price` DOUBLE ,
 `smokingAllowed` BOOLEAN ,
-`status` VARCHAR(250) ,
+`status` NVARCHAR(100) ,
 `stopTime` INT ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
@@ -175,14 +197,14 @@ CREATE TABLE IF NOT EXISTS scheduleRide (`objectId` BINARY(16) NOT NULL PRIMARY 
 `driver` BINARY(16) , FOREIGN KEY (`driver`) REFERENCES `driver`(`objectId`),
 `schedule` BINARY(16) , FOREIGN KEY (`schedule`) REFERENCES `schedule`(`objectId`));
 
-CREATE TABLE IF NOT EXISTS users (`blUserLocale` VARCHAR(250)  NOT NULL,
-`email` VARCHAR(250)  NOT NULL,
+CREATE TABLE IF NOT EXISTS users (`blUserLocale` NVARCHAR(250)  NOT NULL,
+`email` NVARCHAR(100)  NOT NULL,
  INDEX (`email`),
 `oAuthIdentities` JSON ,
-`password` VARCHAR(250)  NOT NULL,
-`phone` VARCHAR(250)  NOT NULL UNIQUE,
+`password` NVARCHAR(250)  NOT NULL,
+`phone` NVARCHAR(100)  NOT NULL UNIQUE,
  INDEX (`phone`),
-`verificationCode` TEXT ,
+`verificationCode` NVARCHAR(100) ,
 `objectId` BINARY(16) NOT NULL PRIMARY KEY ,
 `ownerId` BINARY(16) ,  FOREIGN KEY (`ownerId`) REFERENCES `users`(`objectId`),
 `created` DATETIME ,

@@ -1,40 +1,44 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(500),
+  return sequelize.define('countryinformation', {
+    code: {
+      type: DataTypes.STRING(10),
       allowNull: true
     },
-    color: {
+    countryComponent: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
+    digits: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    maxLuggage: {
+    drivingAge: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    maxSeats: {
-      type: DataTypes.INTEGER,
+    maxPrice: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
+    },
+    minPrice: {
+      type: DataTypes.DOUBLE,
       allowNull: true
     },
     name: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(100),
       allowNull: true
     },
-    picture: {
-      type: DataTypes.STRING(256),
+    priceStep: {
+      type: DataTypes.DOUBLE,
       allowNull: true
     },
-    type: {
+    rateStart: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    user: {
-      type: DataTypes.STRING(250),
-      allowNull: true
-    },
-    year: {
-      type: DataTypes.INTEGER,
+    unit: {
+      type: DataTypes.STRING(50),
       allowNull: true
     },
     objectId: {
@@ -57,18 +61,10 @@ module.exports = function(sequelize, DataTypes) {
     updated: {
       type: DataTypes.DATE,
       allowNull: true
-    },
-    driver: {
-      type: DataTypes.BLOB,
-      allowNull: true,
-      references: {
-        model: 'driver',
-        key: 'objectId'
-      }
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'countryinformation',
     timestamps: false,
     indexes: [
       {
@@ -80,17 +76,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
+        name: "unit",
+        using: "BTREE",
+        fields: [
+          { name: "unit" },
+        ]
+      },
+      {
         name: "ownerId",
         using: "BTREE",
         fields: [
           { name: "ownerId" },
-        ]
-      },
-      {
-        name: "driver",
-        using: "BTREE",
-        fields: [
-          { name: "driver" },
         ]
       },
     ]

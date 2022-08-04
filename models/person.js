@@ -1,29 +1,36 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('users', {
-    blUserLocale: {
-      type: DataTypes.STRING(250),
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING(250),
-      allowNull: false
-    },
-    oAuthIdentities: {
-      type: DataTypes.JSON,
+  return sequelize.define('person', {
+    bio: {
+      type: DataTypes.STRING(500),
       allowNull: true
     },
-    password: {
-      type: DataTypes.STRING(250),
-      allowNull: false
+    birthday: {
+      type: DataTypes.DATE,
+      allowNull: true
     },
-    phone: {
-      type: DataTypes.STRING(250),
-      allowNull: false,
-      unique: "phone"
+    chattiness: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
-    verificationCode: {
-      type: DataTypes.TEXT,
+    firstName: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    gender: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    image: {
+      type: DataTypes.STRING(750),
+      allowNull: true
+    },
+    lastName: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    token: {
+      type: DataTypes.STRING(500),
       allowNull: true
     },
     objectId: {
@@ -47,25 +54,26 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    person: {
+    countryInformations: {
       type: DataTypes.BLOB,
       allowNull: true,
       references: {
-        model: 'person',
+        model: 'countryinformation',
         key: 'objectId'
       }
     },
-    bckls__userStatusId: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    bckls__lastLogin: {
-      type: DataTypes.DATE,
-      allowNull: true
+    statistics: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'userstatistics',
+        key: 'objectId'
+      },
+      unique: "person_ibfk_3"
     }
   }, {
     sequelize,
-    tableName: 'users',
+    tableName: 'person',
     timestamps: false,
     indexes: [
       {
@@ -77,25 +85,11 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "phone",
+        name: "statistics",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "phone" },
-        ]
-      },
-      {
-        name: "email",
-        using: "BTREE",
-        fields: [
-          { name: "email" },
-        ]
-      },
-      {
-        name: "phone_2",
-        using: "BTREE",
-        fields: [
-          { name: "phone" },
+          { name: "statistics" },
         ]
       },
       {
@@ -106,10 +100,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "person",
+        name: "countryInformations",
         using: "BTREE",
         fields: [
-          { name: "person" },
+          { name: "countryInformations" },
         ]
       },
     ]

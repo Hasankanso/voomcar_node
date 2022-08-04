@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     map: {
-      type: DataTypes.STRING(256),
+      type: DataTypes.STRING(750),
       allowNull: true
     },
     maxLuggages: {
@@ -54,7 +54,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     status: {
-      type: DataTypes.STRING(250),
+      type: DataTypes.STRING(100),
       allowNull: true
     },
     stopTime: {

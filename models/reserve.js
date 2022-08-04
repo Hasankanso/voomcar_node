@@ -1,44 +1,16 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('countryinformation', {
-    code: {
-      type: DataTypes.STRING(250),
-      allowNull: true
-    },
-    countryComponent: {
-      type: DataTypes.STRING(250),
-      allowNull: true
-    },
-    digits: {
+  return sequelize.define('reserve', {
+    luggages: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    drivingAge: {
+    seats: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    maxPrice: {
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    minPrice: {
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    name: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    priceStep: {
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    rateStart: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    unit: {
-      type: DataTypes.STRING(500),
+    status: {
+      type: DataTypes.STRING(100),
       allowNull: true
     },
     objectId: {
@@ -61,10 +33,26 @@ module.exports = function(sequelize, DataTypes) {
     updated: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    person: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'person',
+        key: 'objectId'
+      }
+    },
+    ride: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'ride',
+        key: 'objectId'
+      }
     }
   }, {
     sequelize,
-    tableName: 'countryinformation',
+    tableName: 'reserve',
     timestamps: false,
     indexes: [
       {
@@ -76,17 +64,24 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "unit",
-        using: "BTREE",
-        fields: [
-          { name: "unit" },
-        ]
-      },
-      {
         name: "ownerId",
         using: "BTREE",
         fields: [
           { name: "ownerId" },
+        ]
+      },
+      {
+        name: "person",
+        using: "BTREE",
+        fields: [
+          { name: "person" },
+        ]
+      },
+      {
+        name: "ride",
+        using: "BTREE",
+        fields: [
+          { name: "ride" },
         ]
       },
     ]
