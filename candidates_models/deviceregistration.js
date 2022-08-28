@@ -1,37 +1,29 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    color: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      allowNull: true
-    },
-    maxLuggage: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    maxSeats: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    picture: {
-      type: DataTypes.STRING(750),
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    year: {
-      type: DataTypes.INTEGER,
+  return sequelize.define('deviceregistration', {
+    channelName: {
+      type: DataTypes.STRING(45),
       allowNull: false
+    },
+    deviceId: {
+      type: DataTypes.STRING(45),
+      allowNull: false
+    },
+    deviceToken: {
+      type: DataTypes.STRING(256),
+      allowNull: false
+    },
+    expiration: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    operatingSystemName: {
+      type: DataTypes.STRING(15),
+      allowNull: false
+    },
+    operatingSystemVersion: {
+      type: DataTypes.STRING(45),
+      allowNull: true
     },
     objectId: {
       type: DataTypes.BLOB,
@@ -54,33 +46,21 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    driver: {
+    user: {
       type: DataTypes.BLOB,
       allowNull: true,
       references: {
-        model: 'driver',
+        model: 'users',
         key: 'objectId'
       }
-    },
-    user: {
-      type: DataTypes.STRING(45),
-      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'deviceregistration',
     timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "objectId" },
-        ]
-      },
-      {
-        name: "objectId_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
@@ -95,10 +75,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "driver",
+        name: "user",
         using: "BTREE",
         fields: [
-          { name: "driver" },
+          { name: "user" },
         ]
       },
     ]

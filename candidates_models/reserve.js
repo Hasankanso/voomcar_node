@@ -1,37 +1,17 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    color: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      allowNull: true
-    },
-    maxLuggage: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    maxSeats: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    picture: {
-      type: DataTypes.STRING(750),
-      allowNull: true
-    },
-    type: {
+  return sequelize.define('reserve', {
+    luggages: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    year: {
+    seats: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
+    },
+    status: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     },
     objectId: {
       type: DataTypes.BLOB,
@@ -54,33 +34,29 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    driver: {
+    person: {
       type: DataTypes.BLOB,
       allowNull: true,
       references: {
-        model: 'driver',
+        model: 'person',
         key: 'objectId'
       }
     },
-    user: {
-      type: DataTypes.STRING(45),
-      allowNull: true
+    ride: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'ride',
+        key: 'objectId'
+      }
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'reserve',
     timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "objectId" },
-        ]
-      },
-      {
-        name: "objectId_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
@@ -95,10 +71,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "driver",
+        name: "person",
         using: "BTREE",
         fields: [
-          { name: "driver" },
+          { name: "person" },
+        ]
+      },
+      {
+        name: "ride",
+        using: "BTREE",
+        fields: [
+          { name: "ride" },
         ]
       },
     ]

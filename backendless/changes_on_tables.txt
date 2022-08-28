@@ -1,0 +1,32 @@
+users
+email 100
+phone 100
+verificationCode 100
+
+
+ride
+status: 100
+map: 750
+
+reserve:
+status: 100
+
+
+person:
+
+first name: 100
+lastname: 100
+image: 750
+
+countryInformations:
+code: 10
+countryComponent: 10
+name: 100
+unit: 50
+
+
+car:
+brand: 100
+name: 100
+picture: 750
+user: remove

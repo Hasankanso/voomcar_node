@@ -1,37 +1,30 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    color: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      allowNull: true
-    },
-    maxLuggage: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    maxSeats: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    picture: {
-      type: DataTypes.STRING(750),
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    year: {
-      type: DataTypes.INTEGER,
+  return sequelize.define('users', {
+    blUserLocale: {
+      type: DataTypes.STRING(250),
       allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    oAuthIdentities: {
+      type: DataTypes.JSON,
+      allowNull: true
+    },
+    password: {
+      type: DataTypes.STRING(250),
+      allowNull: false
+    },
+    phone: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: "phone"
+    },
+    verificationCode: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     },
     objectId: {
       type: DataTypes.BLOB,
@@ -54,21 +47,25 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    driver: {
+    person: {
       type: DataTypes.BLOB,
       allowNull: true,
       references: {
-        model: 'driver',
+        model: 'person',
         key: 'objectId'
       }
     },
-    user: {
-      type: DataTypes.STRING(45),
+    bckls__userStatusId: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    bckls__lastLogin: {
+      type: DataTypes.DATE,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'users',
     timestamps: false,
     indexes: [
       {
@@ -80,11 +77,25 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "objectId_UNIQUE",
+        name: "phone",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "objectId" },
+          { name: "phone" },
+        ]
+      },
+      {
+        name: "email",
+        using: "BTREE",
+        fields: [
+          { name: "email" },
+        ]
+      },
+      {
+        name: "phone_2",
+        using: "BTREE",
+        fields: [
+          { name: "phone" },
         ]
       },
       {
@@ -95,10 +106,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "driver",
+        name: "person",
         using: "BTREE",
         fields: [
-          { name: "driver" },
+          { name: "person" },
         ]
       },
     ]

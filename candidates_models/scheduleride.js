@@ -1,38 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    color: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      allowNull: true
-    },
-    maxLuggage: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    maxSeats: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    picture: {
-      type: DataTypes.STRING(750),
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    year: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
+  return sequelize.define('scheduleride', {
     objectId: {
       type: DataTypes.BLOB,
       allowNull: false,
@@ -62,25 +30,21 @@ module.exports = function(sequelize, DataTypes) {
         key: 'objectId'
       }
     },
-    user: {
-      type: DataTypes.STRING(45),
-      allowNull: true
+    schedule: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'schedule',
+        key: 'objectId'
+      }
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'scheduleride',
     timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "objectId" },
-        ]
-      },
-      {
-        name: "objectId_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
@@ -99,6 +63,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "driver" },
+        ]
+      },
+      {
+        name: "schedule",
+        using: "BTREE",
+        fields: [
+          { name: "schedule" },
         ]
       },
     ]

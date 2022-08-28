@@ -1,1 +1,1 @@
-docker build -t voomcarwebapp .
+docker build -t voomcarwebapp ..

@@ -1,38 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    color: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      allowNull: true
-    },
-    maxLuggage: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    maxSeats: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    picture: {
-      type: DataTypes.STRING(750),
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    year: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
+  return sequelize.define('driver', {
     objectId: {
       type: DataTypes.BLOB,
       allowNull: false,
@@ -54,33 +22,45 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    driver: {
+    person: {
       type: DataTypes.BLOB,
       allowNull: true,
       references: {
-        model: 'driver',
+        model: 'person',
         key: 'objectId'
       }
     },
-    user: {
-      type: DataTypes.STRING(45),
-      allowNull: true
+    region1: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'location',
+        key: 'objectId'
+      }
+    },
+    region2: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'location',
+        key: 'objectId'
+      }
+    },
+    region3: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'location',
+        key: 'objectId'
+      }
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'driver',
     timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "objectId" },
-        ]
-      },
-      {
-        name: "objectId_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
@@ -95,10 +75,31 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "driver",
+        name: "person",
         using: "BTREE",
         fields: [
-          { name: "driver" },
+          { name: "person" },
+        ]
+      },
+      {
+        name: "region1",
+        using: "BTREE",
+        fields: [
+          { name: "region1" },
+        ]
+      },
+      {
+        name: "region2",
+        using: "BTREE",
+        fields: [
+          { name: "region2" },
+        ]
+      },
+      {
+        name: "region3",
+        using: "BTREE",
+        fields: [
+          { name: "region3" },
         ]
       },
     ]

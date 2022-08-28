@@ -87,15 +87,15 @@ def map_data_type(data, column, constraints):
 # drop tables.
 if drop_existing_tables:
     for file in files:
-        tableName = file.rpartition('.')[0]
-        commands += "DROP TABLE IF EXISTS " + tableName + ";\n"
+        table_name = file.rpartition('.')[0]
+        commands += "DROP TABLE IF EXISTS " + table_name + ";\n"
     commands += "\n"
     
 # generate SQL scripts from backendless schema csv file.
 for file in files:
     file_path = os_path.join(args.schema_path, file)
     row = next(csv.reader(open(file_path)))
-    tableName = file.rpartition('.')[0]
+    table_name = file.rpartition('.')[0]
     variablesString = ""
     first=True
     for f in row:
@@ -110,8 +110,8 @@ for file in files:
        
         variablesString += "`" + column + "`" + " " + dataType
         first = False        
-    commands += "CREATE TABLE IF NOT EXISTS " + tableName + " (" + variablesString + ");\n\n"
- 
+    commands += "CREATE TABLE IF NOT EXISTS " + table_name + " (" + variablesString + ");\n\n"
+    commands += "ALTER TABLE " + table_name + " CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin\n\n"
 print(commands)
 if input("are you sure you want to execute the SQL script above? (y/n)") == "y":
     mycursor = mydb.cursor()

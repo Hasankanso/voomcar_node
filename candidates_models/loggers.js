@@ -1,41 +1,21 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('blconfigurationitemdescription', {
-    defaultValue: {
+  return sequelize.define('loggers', {
+    level: {
       type: DataTypes.STRING(250),
-      allowNull: true
+      allowNull: false
     },
-    displayName: {
+    logFormat: {
       type: DataTypes.STRING(250),
-      allowNull: true
-    },
-    hint: {
-      type: DataTypes.STRING(250),
-      allowNull: true
-    },
-    localServiceVersion: {
-      type: DataTypes.BLOB,
-      allowNull: true
+      allowNull: false
     },
     name: {
       type: DataTypes.STRING(250),
-      allowNull: true
+      allowNull: false
     },
-    options: {
+    policy: {
       type: DataTypes.STRING(250),
-      allowNull: true
-    },
-    order: {
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    required: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.STRING(250),
-      allowNull: true
+      allowNull: false
     },
     objectId: {
       type: DataTypes.BLOB,
@@ -60,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'blconfigurationitemdescription',
+    tableName: 'loggers',
     timestamps: false,
     indexes: [
       {

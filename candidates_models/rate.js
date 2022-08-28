@@ -1,37 +1,17 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(100),
+  return sequelize.define('rate', {
+    comment: {
+      type: DataTypes.STRING(500),
       allowNull: true
     },
-    color: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      allowNull: true
-    },
-    maxLuggage: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    maxSeats: {
-      type: DataTypes.TINYINT,
-      allowNull: true
-    },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    picture: {
-      type: DataTypes.STRING(750),
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    year: {
-      type: DataTypes.INTEGER,
+    grade: {
+      type: DataTypes.DOUBLE,
       allowNull: false
+    },
+    reason: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     objectId: {
       type: DataTypes.BLOB,
@@ -54,33 +34,37 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    driver: {
+    rater: {
       type: DataTypes.BLOB,
       allowNull: true,
       references: {
-        model: 'driver',
+        model: 'person',
         key: 'objectId'
       }
     },
-    user: {
-      type: DataTypes.STRING(45),
-      allowNull: true
+    ride: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'ride',
+        key: 'objectId'
+      }
+    },
+    target: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+      references: {
+        model: 'person',
+        key: 'objectId'
+      }
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'rate',
     timestamps: false,
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "objectId" },
-        ]
-      },
-      {
-        name: "objectId_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
@@ -95,10 +79,24 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "driver",
+        name: "rater",
         using: "BTREE",
         fields: [
-          { name: "driver" },
+          { name: "rater" },
+        ]
+      },
+      {
+        name: "ride",
+        using: "BTREE",
+        fields: [
+          { name: "ride" },
+        ]
+      },
+      {
+        name: "target",
+        using: "BTREE",
+        fields: [
+          { name: "target" },
         ]
       },
     ]

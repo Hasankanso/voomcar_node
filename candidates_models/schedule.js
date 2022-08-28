@@ -1,37 +1,41 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('car', {
-    brand: {
-      type: DataTypes.STRING(100),
+  return sequelize.define('schedule', {
+    endDate: {
+      type: DataTypes.DATE,
       allowNull: true
     },
-    color: {
-      type: DataTypes.BIGINT.UNSIGNED,
+    friday: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     },
-    maxLuggage: {
-      type: DataTypes.TINYINT,
+    monday: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     },
-    maxSeats: {
-      type: DataTypes.TINYINT,
+    saturday: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     },
-    name: {
-      type: DataTypes.STRING(100),
+    startDate: {
+      type: DataTypes.DATE,
       allowNull: true
     },
-    picture: {
-      type: DataTypes.STRING(750),
+    sunday: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     },
-    type: {
-      type: DataTypes.INTEGER,
+    thursday: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     },
-    year: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    tuesday: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    wednesday: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     },
     objectId: {
       type: DataTypes.BLOB,
@@ -53,22 +57,10 @@ module.exports = function(sequelize, DataTypes) {
     updated: {
       type: DataTypes.DATE,
       allowNull: true
-    },
-    driver: {
-      type: DataTypes.BLOB,
-      allowNull: true,
-      references: {
-        model: 'driver',
-        key: 'objectId'
-      }
-    },
-    user: {
-      type: DataTypes.STRING(45),
-      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'car',
+    tableName: 'schedule',
     timestamps: false,
     indexes: [
       {
@@ -80,25 +72,10 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "objectId_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "objectId" },
-        ]
-      },
-      {
         name: "ownerId",
         using: "BTREE",
         fields: [
           { name: "ownerId" },
-        ]
-      },
-      {
-        name: "driver",
-        using: "BTREE",
-        fields: [
-          { name: "driver" },
         ]
       },
     ]
